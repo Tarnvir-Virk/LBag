@@ -1,54 +1,66 @@
 
+// Light Sensor pin
 int lightSensorPin = A2;
 
-int led12 = 12;
+// On board LED pin
+int onBoardRedLED = 12;
 
-int ledA5 = A5;
-int led6 = 6;
+// LED pins
+int redLED = A5;
+int yellowLED = 6;
 
 void setup() {
   // put your setup code here, to run once:
 
-  pinMode(led12, OUTPUT);
+  // set LED pinmode
+  pinMode(onBoardRedLED, OUTPUT);
 
-  pinMode(ledA5, OUTPUT);
-  pinMode(led6, OUTPUT);
+  pinMode(redLED, OUTPUT);
+  pinMode(yellowLED, OUTPUT);
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
+  // if light sensor reading in less than 30, turn on these LEDs
   if (analogRead(lightSensorPin) < 30) {
+    
+    // turn on all LEDs
+    digitalWrite(onBoardRedLED, HIGH);
 
-    digitalWrite(led12, HIGH);
-
-    digitalWrite(ledA5, HIGH);
-    digitalWrite(led6, HIGH);
+    digitalWrite(redLED, HIGH);
+    digitalWrite(yellowLED, HIGH);
 
   }
+  // if light sensor reading is between 30 and 65, turn on these LEDs
   else if (analogRead(lightSensorPin) < 65) {
 
-    digitalWrite(led12, HIGH);
+    // turn on red LEDs
+    digitalWrite(onBoardRedLED, HIGH);
 
-    digitalWrite(ledA5, HIGH);
-    digitalWrite(led6, LOW);
+    digitalWrite(redLED, HIGH);
+    digitalWrite(yellowLED, LOW);
 
   }
+  // if light sensor reading is between 65 and 100, turn on these LEDs
   else if (analogRead(lightSensorPin) < 100) {
 
-    digitalWrite(led12, LOW);
+    // turn on yellow LEDs
+    digitalWrite(onBoardRedLED, LOW);
 
-    digitalWrite(ledA5, LOW);
-    digitalWrite(led6, HIGH);
+    digitalWrite(redLED, LOW);
+    digitalWrite(yellowLED, HIGH);
 
   }
+  // if not dark enough
   else {
 
-    digitalWrite(led12, LOW);
+    // turn off all LEDs
+    digitalWrite(onBoardRedLED, LOW);
 
-    digitalWrite(ledA5, LOW);
-    digitalWrite(led6, LOW);
+    digitalWrite(redLED, LOW);
+    digitalWrite(yellowLED, LOW);
 
   }
 }
